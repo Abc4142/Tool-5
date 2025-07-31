@@ -3,199 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Free Age Calculator Tool - Fast & Accurate</title>
-  <meta name="description" content="Use our free and accurate online Age Calculator Tool with PDF download, Hindi/English support, and mobile-friendly design.">
-  <meta name="keywords" content="age calculator tool, online age calculator, free date of birth calculator, age calculator in hindi, age calculator pdf">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap">
-  
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR-ADSENSE-CLIENT-ID"
-     crossorigin="anonymous"></script>
+  <title>Age Calculator Tool</title>
+  <meta name="description" content="Calculate your exact age in years, months, days, and more using our free online Age Calculator Tool. Hindi/English supported with PDF export.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+
+  <!-- Google AdSense Code -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx" crossorigin="anonymous"></script>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      color: #fff;
-      text-align: center;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
       padding: 20px;
+      background: #f0f8ff;
+      color: #333;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #0072ff;
     }
     .container {
       max-width: 600px;
-      background: rgba(0,0,0,0.2);
-      margin: 40px auto;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 1rem;
-      margin-bottom: 25px;
-    }
-    input, select, button {
+    label, select, input {
+      display: block;
       width: 100%;
-      padding: 12px;
       margin: 10px 0;
-      border-radius: 10px;
-      border: none;
       font-size: 1rem;
     }
     button {
-      background: #fff;
-      color: #0072ff;
-      font-weight: bold;
+      background-color: #0072ff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
       cursor: pointer;
-      transition: 0.3s;
     }
     button:hover {
-      background: #0072ff;
-      color: white;
+      background-color: #005dc1;
     }
-    #result {
+    .result {
       margin-top: 20px;
-      font-size: 1rem;
-      background: rgba(255,255,255,0.15);
-      padding: 15px;
-      border-radius: 10px;
+      font-size: 1.1rem;
     }
-    .lang-toggle button {
-      width: 48%;
-      margin: 0 1%;
+
+    /* Hyperlink Button */
+    .hyperlink-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: white;
+      padding: 12px 24px;
+      margin-top: 30px;
+      font-size: 1.1rem;
       font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
-    .adsense {
-      margin: 20px auto;
-      max-width: 100%;
-    }
-    footer {
-      margin-top: 40px;
-      font-size: 0.9rem;
-      color: #d0d0d0;
+    .hyperlink-btn:hover {
+      background: #005dc1;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1 id="title">Age Calculator Tool</h1>
-    <p id="description">Calculate your exact age in years, months, days with PDF export and Hindi/English support.</p>
+    <h1>🔢 Age Calculator Tool</h1>
 
-    <!-- AdSense Ad -->
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="YOUR-ADSENSE-CLIENT-ID"
-           data-ad-slot="YOUR-AD-UNIT-ID"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <div class="lang-toggle">
-      <button onclick="setLanguage('en')">English</button>
-      <button onclick="setLanguage('hi')">हिंदी</button>
-    </div>
-
-    <input type="text" id="name" placeholder="Your Name / आपका नाम" />
-    <select id="gender">
-      <option value="">Select Gender / लिंग चुनें</option>
-      <option value="male">Male / पुरुष</option>
-      <option value="female">Female / महिला</option>
-    </select>
-    <label for="dob" id="dob-label">Date of Birth / जन्म तिथि:</label>
+    <label for="dob">Enter your Date of Birth:</label>
     <input type="date" id="dob" />
-    <button onclick="calculateAge()" id="calcBtn">Calculate Age / आयु निकालें</button>
 
-    <div id="result"></div>
+    <button onclick="calculateAge()">Calculate Age</button>
 
-    <button onclick="downloadPDF()" id="pdfBtn">Download as PDF</button>
+    <div class="result" id="result"></div>
 
-    <!-- AdSense Ad -->
-    <div class="adsense">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="YOUR-ADSENSE-CLIENT-ID"
-           data-ad-slot="YOUR-AD-UNIT-ID"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+    <!-- AdSense Ad Slot -->
+    <ins class="adsbygoogle"
+      style="display:block; text-align:center;"
+      data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+      data-ad-slot="1234567890"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <!-- Hyperlink to this tool -->
+    <a href="https://yourdomain.com/index.html" class="hyperlink-btn" target="_blank">👉 Try This Tool on GitHub</a>
   </div>
 
-  <footer>
-    © 2025 Age Calculator Tool | Designed for Accuracy & Simplicity.
-  </footer>
-
   <script>
-    let currentLang = 'en';
-
-    function setLanguage(lang) {
-      currentLang = lang;
-      document.getElementById("title").innerText = lang === 'hi' ? "आयु कैलकुलेटर टूल" : "Age Calculator Tool";
-      document.getElementById("description").innerText = lang === 'hi' ? "आपकी आयु वर्षों, महीनों और दिनों में निकालें। पीडीएफ डाउनलोड और हिंदी/अंग्रेज़ी समर्थन।" : "Calculate your exact age in years, months, days with PDF export and Hindi/English support.";
-      document.getElementById("dob-label").innerText = lang === 'hi' ? "जन्म तिथि:" : "Date of Birth:";
-      document.getElementById("calcBtn").innerText = lang === 'hi' ? "आयु निकालें" : "Calculate Age";
-      document.getElementById("pdfBtn").innerText = lang === 'hi' ? "पीडीएफ डाउनलोड करें" : "Download as PDF";
-    }
-
     function calculateAge() {
-      const name = document.getElementById("name").value;
-      const gender = document.getElementById("gender").value;
       const dob = new Date(document.getElementById("dob").value);
       const today = new Date();
 
-      if (!name || !dob || !gender) {
-        alert(currentLang === 'hi' ? "कृपया सभी फ़ील्ड भरें।" : "Please fill all fields.");
+      if (dob == "Invalid Date") {
+        document.getElementById("result").innerText = "Please enter a valid date.";
         return;
       }
 
-      let ageYears = today.getFullYear() - dob.getFullYear();
-      let ageMonths = today.getMonth() - dob.getMonth();
-      let ageDays = today.getDate() - dob.getDate();
+      let years = today.getFullYear() - dob.getFullYear();
+      let months = today.getMonth() - dob.getMonth();
+      let days = today.getDate() - dob.getDate();
 
-      if (ageDays < 0) {
-        ageMonths--;
-        ageDays += 30;
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
       }
-      if (ageMonths < 0) {
-        ageYears--;
-        ageMonths += 12;
+      if (months < 0) {
+        years--;
+        months += 12;
       }
 
-      let category = "";
-      if (ageYears < 13) category = currentLang === 'hi' ? "बच्चा" : "Child";
-      else if (ageYears < 60) category = currentLang === 'hi' ? "वयस्क" : "Adult";
-      else category = currentLang === 'hi' ? "वरिष्ठ नागरिक" : "Senior";
-
-      const result = `
-        <strong>${currentLang === 'hi' ? "नाम" : "Name"}:</strong> ${name}<br/>
-        <strong>${currentLang === 'hi' ? "लिंग" : "Gender"}:</strong> ${gender}<br/>
-        <strong>${currentLang === 'hi' ? "आयु" : "Age"}:</strong> ${ageYears} ${currentLang === 'hi' ? "साल" : "Years"}, ${ageMonths} ${currentLang === 'hi' ? "महीने" : "Months"}, ${ageDays} ${currentLang === 'hi' ? "दिन" : "Days"}<br/>
-        <strong>${currentLang === 'hi' ? "आयु वर्ग" : "Age Category"}:</strong> ${category}
+      const category = years < 13 ? "👶 Child" : years < 60 ? "🧑 Adult" : "👴 Senior";
+      document.getElementById("result").innerHTML = `
+        <strong>Your Age:</strong><br/>
+        ${years} years, ${months} months, and ${days} days<br/>
+        <strong>Category:</strong> ${category}
       `;
-
-      document.getElementById("result").innerHTML = result;
-    }
-
-    function downloadPDF() {
-      const result = document.getElementById("result").innerHTML;
-      const win = window.open('', '', 'height=700,width=700');
-      win.document.write('<html><head><title>Age Report</title></head><body>');
-      win.document.write('<h2>Age Report</h2>');
-      win.document.write(result);
-      win.document.write('</body></html>');
-      win.document.close();
-      win.print();
     }
   </script>
+
 </body>
 </html>
