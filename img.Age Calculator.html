@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Age Calculator Tool</title>
+  <meta name="description" content="Unique online Age Calculator Tool with Hindi/English support, PDF export, and mobile-friendly design.">
+
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR-ADSENSE-CLIENT-ID"
+     crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+    button {
+      background: #fff;
+      color: #0072ff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #0072ff;
+      color: #fff;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      background: rgba(255,255,255,0.2);
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .lang-toggle button {
+      width: 48%;
+      display: inline-block;
+    }
+    .adsense {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="title">Age Calculator Tool</h1>
+
+    <!-- Adsense Ad Unit -->
+    <div class="adsense">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="YOUR-ADSENSE-CLIENT-ID"
+           data-ad-slot="YOUR-AD-UNIT-ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="lang-toggle">
+      <button onclick="setLanguage('en')">English</button>
+      <button onclick="setLanguage('hi')">हिंदी</button>
+    </div>
+
+    <div class="form">
+      <input type="text" id="name" placeholder="Your Name / आपका नाम" />
+      <select id="gender">
+        <option value="">Select Gender / लिंग चुनें</option>
+        <option value="male">Male / पुरुष</option>
+        <option value="female">Female / महिला</option>
+      </select>
+      <label for="dob" id="dob-label">Date of Birth / जन्म तिथि:</label>
+      <input type="date" id="dob" />
+      <button onclick="calculateAge()" id="calcBtn">Calculate Age / आयु निकालें</button>
+    </div>
+
+    <div id="result"></div>
+
+    <button onclick="downloadPDF()" id="pdfBtn">Download as PDF</button>
+
+    <!-- Bottom Ad Unit -->
+    <div class="adsense">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="YOUR-ADSENSE-CLIENT-ID"
+           data-ad-slot="YOUR-AD-UNIT-ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <script>
+    let currentLang = 'en';
+
+    function calculateAge() {
+      const name = document.getElementById("name").value;
+      const gender = document.getElementById("gender").value;
+      const dob = new Date(document.getElementById("dob").value);
+      const today = new Date();
+
+      if (!name || !dob || !gender) {
+        alert(currentLang === 'hi' ? "कृपया सभी फ़ील्ड भरें।" : "Please fill all fields.");
+        return;
+      }
+
+      let ageYears = today.getFullYear() - dob.getFullYear();
+      let ageMonths = today.getMonth() - dob.getMonth();
+      let ageDays = today.getDate() - dob.getDate();
+
+      if (ageDays < 0) {
+        ageMonths--;
+        ageDays += 30;
+      }
+      if (ageMonths < 0) {
+        ageYears--;
+        ageMonths += 12;
+      }
+
+      let category = "";
+      if (ageYears < 13) category = currentLang === 'hi' ? "बच्चा" : "Child";
+      else if (ageYears < 60) category = currentLang === 'hi' ? "वयस्क" : "Adult";
+      else category = currentLang === 'hi' ? "वरिष्ठ नागरिक" : "Senior";
+
+      const result = `
+        <strong>${currentLang === 'hi' ? "नाम" : "Name"}:</strong> ${name}<br/>
+        <strong>${currentLang === 'hi' ? "लिंग" : "Gender"}:</strong> ${gender}<br/>
+        <strong>${currentLang === 'hi' ? "आयु" : "Age"}:</strong> ${ageYears} ${currentLang === 'hi' ? "साल" : "Years"}, ${ageMonths} ${currentLang === 'hi' ? "महीने" : "Months"}, ${ageDays} ${currentLang === 'hi' ? "दिन" : "Days"}<br/>
+        <strong>${currentLang === 'hi' ? "आयु वर्ग" : "Age Category"}:</strong> ${category}
+      `;
+      document.getElementById("result").innerHTML = result;
+    }
+
+    function downloadPDF() {
+      const result = document.getElementById("result").innerHTML;
+      const win = window.open('', '', 'height=700,width=700');
+      win.document.write('<html><head><title>Age Report</title></head><body>');
+      win.document.write('<h2>Age Report</h2>');
+      win.document.write(result);
+      win.document.write('</body></html>');
+      win.document.close();
+      win.print();
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.getElementById("title").innerText = lang === 'hi' ? "आयु कैलकुलेटर टूल" : "Age Calculator Tool";
+      document.getElementById("dob-label").innerText = lang === 'hi' ? "जन्म तिथि:" : "Date of Birth:";
+      document.getElementById("calcBtn").innerText = lang === 'hi' ? "आयु निकालें" : "Calculate Age";
+      document.getElementById("pdfBtn").innerText = lang === 'hi' ? "पीडीएफ डाउनलोड करें" : "Download as PDF";
+    }
+  </script>
+</body>
+</html>
